@@ -9,8 +9,7 @@ public class Player : MonoBehaviour {
 
 	private SpriteRenderer sprite;
 	private CharacterController2D controller;
-	private bool dead = false;
-	private bool jumping = false;
+	public bool isDead { get; private set; }
 
 	void Awake() {
 		sprite = GetComponent<SpriteRenderer>();
@@ -23,11 +22,9 @@ public class Player : MonoBehaviour {
 	void Update() {
 		bool jump = Input.GetButtonDown("Jump");
 		if (jump) {
-			jumping = true;
 			controller.Jump();
 		}
 		if (Input.GetButtonUp("Jump")) {
-			jumping = false;
 			controller.CancelJump();
 		}
 
@@ -39,13 +36,13 @@ public class Player : MonoBehaviour {
 	}
 
 	public void Die() {
-		if (dead) {
+		if (isDead) {
 			return;
 		}
 
 		// TODO: Camera shake and sound FX
 
-		dead = true;
+		isDead = true;
 
 		if (deathEffect) {
 			var effect = Instantiate(deathEffect, transform.position, Quaternion.Euler(0, -90, 0));

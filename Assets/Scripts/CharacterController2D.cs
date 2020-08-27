@@ -65,6 +65,9 @@ public class CharacterController2D : MonoBehaviour {
 			if (hit == boxCollider) {
 				continue;
 			}
+			if (hit.isTrigger) {
+				continue;
+			}
 			ColliderDistance2D dist = hit.Distance(boxCollider);
 			if (dist.isOverlapped) {
 				transform.Translate(dist.pointA - dist.pointB);
