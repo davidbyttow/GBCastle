@@ -1121,8 +1121,8 @@ MonoBehaviour:
   walkAcceleration: 40
   groundDeceleration: 100
   inAirSpeedScale: 0.8
-  jumpForce: 4
-  fallingGravityScale: 2
+  jumpForce: 8
+  fallingGravityScale: 3
 --- !u!61 &949986286
 BoxCollider2D:
   m_ObjectHideFlags: 0
