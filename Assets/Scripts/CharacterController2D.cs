@@ -19,6 +19,7 @@ public class CharacterController2D : MonoBehaviour {
 	[SerializeField] private float jumpForce = 20f;
 	[SerializeField] private float fallingGravityScale = 2f;
 
+	private Animator animator;
 
 	private BoxCollider2D boxCollider;
 	private float inAirStartTime = 0;
@@ -28,6 +29,7 @@ public class CharacterController2D : MonoBehaviour {
 
 	void Awake() {
 		boxCollider = GetComponent<BoxCollider2D>();
+		animator = GetComponent<Animator>();
 	}
 	void Start() {
 		inAirStartTime = Time.time;
@@ -51,6 +53,15 @@ public class CharacterController2D : MonoBehaviour {
 		transform.Translate(velocity * Time.deltaTime);
 
 		CheckGround();
+
+		UpdateAnimation();
+	}
+
+	void UpdateAnimation() {
+		if (animator) {
+			var speed = Mathf.Clamp(Mathf.Abs(velocity.x) / walkSpeed, 0, 1);
+			animator.SetFloat("Walk", speed);
+		}
 	}
 
 	void FixedUpdate() {
